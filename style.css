@@ -1,0 +1,144 @@
+:root {
+  --ink: #2d2a32;
+  --ink-soft: #5c5766;
+  --accent: #f59e0b;
+  --leaf: #4caf50;
+  --stem: #3e8e41;
+  --petal: #ffcf33;
+  --petal-deep: #f59e0b;
+  --center: #5a3a18;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: 'Poppins', sans-serif; }
+
+body {
+  background: linear-gradient(180deg, #fffef6, #fefce8);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+.sky {
+  position: fixed; inset: 0; z-index: -2;
+}
+#petalCanvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+}
+.stars {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(#ffd27a 1px, transparent 1px),
+                    radial-gradient(#ffd27a 1px, transparent 1px);
+  background-size: 50px 50px; opacity: .25;
+}
+
+.wrap {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem 1rem 8rem;
+}
+
+.card {
+  width: 100%; max-width: 720px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.card__header { text-align: center; }
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--ink);
+}
+.subtitle { color: var(--ink-soft); margin-bottom: 1rem; }
+.letter { line-height: 1.7; font-size: 1.05rem; }
+.letter p { margin-bottom: 1rem; }
+.accent { color: var(--accent); font-weight: bold; }
+.signature { font-family: 'Playfair Display', serif; font-weight: 700; }
+
+.card__footer {
+  display: flex; gap: .75rem; justify-content: center; margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: .8rem 1.2rem; border: none; border-radius: 50px;
+  background: linear-gradient(180deg, #ffd166, #ffb703);
+  font-weight: bold; cursor: pointer;
+  box-shadow: 0 5px 15px rgba(245,158,11,.4);
+}
+.btn:hover { transform: scale(1.05); }
+.btn--ghost {
+  background: transparent; border: 2px dashed var(--accent);
+  color: var(--accent);
+}
+
+/* Sunflowers */
+.garden {
+  position: fixed; left: 0; right: 0; bottom: -10px; height: 200px;
+  pointer-events: none; z-index: -1;
+}
+.sunflower { animation: sway 4s ease-in-out infinite; }
+@keyframes sway {
+  0%,100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.stem { fill: var(--stem); }
+.leaf { fill: var(--leaf); }
+.petal { fill: var(--petal); stroke: var(--petal-deep); stroke-width: 1; }
+.center { fill: var(--center); }
+.center--shine { fill: none; stroke: #fff6; stroke-width: 3; }
+
+/* Floating hearts */
+.heart {
+  position: fixed; pointer-events: none; font-size: 22px;
+  animation: floatUp 2.6s ease-in forwards;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(.8); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+}
+/* Replay button extra style */
+.btn--ghost {
+  background: transparent;
+  border: 2px dashed var(--accent);
+  color: var(--accent);
+  position: relative;
+  overflow: hidden;
+  transition: all .3s ease;
+}
+
+.btn--ghost:hover {
+  background: rgba(245, 158, 11, 0.1);
+  transform: rotate(-5deg) scale(1.1);
+  border-style: solid;
+}
+
+/* little glowing pulse */
+.btn--ghost::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: radial-gradient(circle, rgba(245,158,11,0.25) 10%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity .3s, transform .3s;
+}
+.btn--ghost:hover::after {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+/* replay wiggle animation when clicked */
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-10deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-6deg); }
+  80% { transform: rotate(6deg); }
+  100% { transform: rotate(0deg); }
+}
